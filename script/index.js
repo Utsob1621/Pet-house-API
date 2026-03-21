@@ -22,18 +22,21 @@ const displayCategory = (categories) => {
 // displayCategory section
 
 const loadPets = async (categoryName) => {
-  document.getElementById("no-data").style.display = "none";
-
+  spinnerShow("loading-data")
+  foundNoteHide("no-data" );
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`,
   );
   const data = await response.json();
-  displayPets(data.data);
+  if(data.data){
+    displayPets(data.data);
+    spinnerHide("loading-data")
+  }
 };
 
 const displayPets = (pets) => {
   if (pets.length <= 0) {
-    document.getElementById("no-data").style.display = "block";
+    foundNoteShow("no-data" );
   }
   const petsContainer = document.getElementById("pets-container");
   petsContainer.innerHTML = "";
@@ -49,7 +52,7 @@ const displayPets = (pets) => {
   <div class="card-body">
     <div class=" flex justify-around gap-8 mb-2">
     <h2 class="card-title font-medium">Name : ${pet.pet_name}</h2>
-    <h2 class="card-title font-medium">Gender : ${pet.gender}</h2>
+    <h2 class="card-title font-medium">Gender : ${pet.gender ? pet.gender:" "}</h2>
     </div>
     <p class = "line-clamp-2 font-normal">${pet.pet_details}</p>
     <div class="card-actions justify-start">
@@ -62,6 +65,29 @@ const displayPets = (pets) => {
     petsContainer.appendChild(petsDiv);
   });
 };
+
+
+
+
+
+
+
+const foundNoteHide = (id) => {
+  document.getElementById(id).style.display = "none";
+}
+
+const foundNoteShow = (id) => {
+   document.getElementById(id).style.display = "block";
+}
+
+const spinnerShow = (id) => {
+  document.getElementById(id).style.display = "block";
+}
+
+const spinnerHide = (id) => {
+   document.getElementById(id).style.display = "none";
+}
+
 
 loadCategory();
 loadPets("cat");
