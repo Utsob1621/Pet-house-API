@@ -29,7 +29,8 @@
       <nav>
         <div class="navbar bg-base-100 shadow-sm">
           <div class="flex-1">
-            <a class="btn btn-ghost text-xl font-bold lobster-regular animate-pulse"
+            <a
+              class="btn btn-ghost text-xl font-bold lobster-regular animate-pulse"
               >Pet's House</a
             >
           </div>
@@ -125,8 +126,27 @@
         </h1>
         <div
           id="pets-container"
-          class="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-10 w-11/12 mx-auto"
+          class="grid grid-cols-1 lg:grid-cols-4 gap-5 lg:gap-10 w-11/12 mx-auto"
         ></div>
+      </section>
+
+      <!-- model -->
+      <section id="model-container">
+        <dialog id="my_modal_1" class="modal">
+          <div class="modal-box">
+            <div
+              id="model-sub-container"
+              class="bg-[#FFF0F5] p-5 rounded-lg border border-gray-400"
+            ></div>
+            <div class="modal-action">
+              <button class="btn btn-primary text-white">Add</button>
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn btn-primary text-white">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </section>
     </main>
 
