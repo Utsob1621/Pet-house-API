@@ -57,7 +57,7 @@ const displayPets = (pets) => {
     <p class = "line-clamp-2 font-normal">${pet.pet_details}</p>
     <div class="card-actions justify-start">
       <button onclick="my_modal_1.showModal()" class="btn btn-primary text-white font-medium select w-full">Select</button>
-      <button onclick =  class="btn btn-primary text-white font-medium w-full">Details</button>
+      <button onclick="my_modal_2.showModal(handleDetails(${pet.petId}))"  class="btn btn-primary text-white font-medium w-full">Details</button>
     </div>
   </div>
 </div>
@@ -83,10 +83,18 @@ const displayPets = (pets) => {
 const openModel = (title, gen) => {
   const modelSubContainer = document.getElementById("model-sub-container");
   const modelDiv = document.createElement("div");
-  modelDiv.classList.add("border", "border-[#FFF0F5]", "p-5", "shadow-sm", "rounded-lg", "mb-5")
+  modelDiv.classList.add(
+    "border",
+    "border-[#FFF0F5]",
+    "p-5",
+    "shadow-sm",
+    "rounded-lg",
+    "mb-5",
+    "lobster-regular",
+  );
   modelDiv.innerHTML = `
-      <h2 class="card-title font-medium">Name : ${title? title : " "}</h2>
-      <h2 class="card-gender font-medium">Gender : ${gen}</h2>
+      <h2 class="card-title font-medium"> ${title ? title : " "}</h2>
+      <h2 class="card-gender font-medium">${gen}</h2>
       
     `;
   modelSubContainer.appendChild(modelDiv);
@@ -108,18 +116,53 @@ const spinnerHide = (id) => {
   document.getElementById(id).style.display = "none";
 };
 
-
-
 const getValueById = (id) => {
- const element = document.getElementById(id).innerText;
- const convertedValue = parseInt(element);
- return convertedValue;
- 
-}
+  const element = document.getElementById(id).innerText;
+  const convertedValue = parseInt(element);
+  return convertedValue;
+};
 
-
-
-
+const handleDetails = async (petId) => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${petId}`,
+  );
+  const data = await response.json();
+  const modelDetailsContainer = document.getElementById(
+    "model-details-container",
+  );
+  const modelDiv2 = document.createElement("div");
+  modelDiv2.classList.add(
+    "border",
+    "border-[#FFF0F5]",
+    "p-5",
+    "shadow-sm",
+    "rounded-lg",
+    "mb-5",
+    "lobster-regular",
+  );
+  modelDiv2.innerHTML = `
+    <h2 class="card-title font-medium">Category : ${data.petData.category ? data.petData.category : " "}</h2>
+    <h2 class="card-title font-medium">Name : ${
+      data.petData.pet_name ? data.petData.pet_name : " "
+    }</h2>
+    <h2 class="card-title font-medium">Breed : ${data.petData.breed ? data.petData.breed : " "}</h2>
+    <h2 class="card-title font-medium">Date of Birth : ${data.petData.date_of_birth ? data.petData.date_of_birth : " "}</h2>
+    <h2 class="card-title font-medium">Gender : ${
+      data.petData.gender ? data.petData.gender : " "
+    }</h2>
+    <p class="card-title font-medium">Price : ${
+      data.petData.price ? data.petData.price : " "
+    } $</p>
+    <p class = "font-normal">Vaccinated Status : ${
+      data.petData.vaccinated_status ? data.petData.vaccinated_status : " "
+    }</p>
+    <p class = "font-normal">Pet Details : ${
+      data.petData.pet_details ? data.petData.pet_details : " "
+    }</p>
+  `;
+  modelDetailsContainer.appendChild(modelDiv2);
+  console.log(data.petData);
+};
 
 loadCategory();
 loadPets("cat");
