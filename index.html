@@ -3,20 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>index</title>
+    <title>cps-7</title>
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .lobster-regular {
+        font-family: "Lobster", sans-serif;
+      }
+    </style>
   </head>
   <body>
     <header>
       <nav>
         <div class="navbar bg-base-100 shadow-sm">
           <div class="flex-1">
-            <a class="btn btn-ghost text-xl font-bold">Pet's House</a>
+            <a class="btn btn-ghost text-xl font-bold lobster-regular"
+              >Pet's House</a
+            >
           </div>
           <div class="flex-none">
             <div class="dropdown dropdown-end">
@@ -36,7 +51,9 @@
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                     />
                   </svg>
-                  <!-- <span class="badge badge-sm indicator-item">8</span> -->
+                  <span class="badge badge-sm indicator-item lobster-regular"
+                    >8</span
+                  >
                 </div>
               </div>
               <div
@@ -44,10 +61,12 @@
                 class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
               >
                 <div class="card-body">
-                  <span class="text-lg font-bold">8 Items</span>
-                  <span class="text-info">Subtotal: $999</span>
+                  <span class="text-lg font-bold lobster-regular">8 Items</span>
+                  <span class="text-info lobster-regular">Subtotal: $999</span>
                   <div class="card-actions">
-                    <button class="btn btn-primary btn-block">View cart</button>
+                    <button class="btn btn-primary btn-block lobster-regular">
+                      View cart
+                    </button>
                   </div>
                 </div>
               </div>
@@ -67,7 +86,7 @@
               </div>
               <ul
                 tabindex="-1"
-                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow lobster-regular"
               >
                 <li>
                   <a class="justify-between">
@@ -86,15 +105,28 @@
     <main>
       <!-- category section -->
       <section
-        class="flex justify-center gap-5 p-5 w-full mx-auto"
+        class="flex justify-center gap-4 p-5 w-full mx-auto lg:gap-10 lobster-regular"
         id="category-container"
       ></section>
 
-      <section class="mt-6 flex justify-center">
-        <h1 id="no-data" class="text-2xl font-bold">No data is found !!!</h1>
-        <div id="pets-container" class="">
+      <!-- loading section -->
+      <section id="loading-data" class="text-center mt-5">
+        <span class="loading loading-dots loading-xs"></span>
+        <span class="loading loading-dots loading-xs"></span>
+        <span class="loading loading-dots loading-sm"></span>
+        <span class="loading loading-dots loading-md"></span>
+        <span class="loading loading-dots loading-lg"></span>
+        <span class="loading loading-dots loading-xl"></span>
+      </section>
 
-        </div>
+      <section class="mt-6 lobster-regular">
+        <h1 id="no-data" class="text-3xl font-semibold text-center mt-20">
+          No data is found !!!
+        </h1>
+        <div
+          id="pets-container"
+          class="grid grid-cols-1 lg:grid-cols-4 gap-5 lg:gap-14 w-11/12 mx-auto"
+        ></div>
       </section>
     </main>
 

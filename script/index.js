@@ -3,33 +3,26 @@ const loadCategory = async () => {
     "https://openapi.programming-hero.com/api/peddy/categories",
   );
   const data = await response.json();
-  showCategory(data.categories);
+  displayCategory(data.categories);
 };
 
-// onclick = "loadPets("go")"
-const showCategory = (categories) => {
-  categories.forEach((element) => {
-    // console.log(element);
+const displayCategory = (categories) => {
+  categories.forEach((cat) => {
+    // console.log(cat);
     const categoryContainer = document.getElementById("category-container");
-
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <button onclick = "loadPets('${element.category}')" class = "btn"{
-        constructor(parameters) {
-          
-        }
-      }>${element.category} 
-      <img class = "w-8" src="${element.category_icon}" alt="">
-      </button>
+    const categoryDiv = document.createElement("div");
+    categoryDiv.innerHTML = `
+      <button onclick = loadPets('${cat.category}') class = "btn bg-[#FFF0F5] hover:bg-white font-medium text-xl">${cat.category} 
+      <img class = "w-6 lg:w-8" src="${cat.category_icon}" alt=""></button>
     `;
-    categoryContainer.appendChild(div);
+    categoryContainer.appendChild(categoryDiv);
   });
 };
 
-const loadPets = async (categoryName) => {
+// displayCategory section
 
-  document.getElementById("no-data").style.display = "none"
-  petsContainer = document.getElementById("pets-container").style.display = "block";
+const loadPets = async (categoryName) => {
+  document.getElementById("no-data").style.display = "none";
 
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`,
@@ -38,48 +31,37 @@ const loadPets = async (categoryName) => {
   displayPets(data.data);
 };
 
-
 const displayPets = (pets) => {
-
-  if(pets.length < 1){
-      petsContainer = document.getElementById("pets-container").style.display = "none";
-      document.getElementById("no-data").style.display = "block"
+  if (pets.length <= 0) {
+    document.getElementById("no-data").style.display = "block";
   }
+  const petsContainer = document.getElementById("pets-container");
+  petsContainer.innerHTML = "";
   pets.forEach((pet) => {
-    // console.log(pet);
-    const petsContainer = document.getElementById("pets-container");
-    petsContainer.innerHTML = "";
-    const div = document.createElement("div");
-    div.classList.add("mt-5")
-    div.innerHTML = `
-      <div class="card bg-base-100 w-96 shadow-sm">
+    const petsDiv = document.createElement("div");
+    petsDiv.innerHTML = `
+      <div class="card bg-base-100 lg:w-96 shadow-sm">
   <figure>
-    <img
+    <img class = "w-full object-cover"
       src="${pet.image}"
-      alt="Shoes" />
+      alt="Pet's" />
   </figure>
   <div class="card-body">
-    <h2 class="card-title">${pet.title}</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary select">Select</button>
+    <div class=" flex justify-around gap-8 mb-2">
+    <h2 class="card-title font-medium">Name : ${pet.pet_name}</h2>
+    <h2 class="card-title font-medium">Gender : ${pet.gender}</h2>
+    </div>
+    <p class = "line-clamp-2 font-normal">${pet.pet_details}</p>
+    <div class="card-actions justify-start">
+      <button class="btn btn-primary text-white font-medium">Select</button>
+      <button class="btn btn-primary text-white font-medium">Details</button>
     </div>
   </div>
 </div>
-    `
-
-    petsContainer.appendChild(div);
-  })
-
-
-  const allSelectButton = document.getElementsByClassName("select");
-  for (const button of allSelectButton){
-    button.addEventListener("click", (event) => {
-      console.log(event.target)
-    })
-  }
-}
-
-loadPets("cat");
+    `;
+    petsContainer.appendChild(petsDiv);
+  });
+};
 
 loadCategory();
+loadPets("cat");
