@@ -57,7 +57,7 @@ const displayPets = (pets) => {
     <p class = "line-clamp-2 font-normal">${pet.pet_details}</p>
     <div class="card-actions justify-start">
       <button onclick="my_modal_1.showModal()" class="btn btn-primary text-white font-medium select w-full">Select</button>
-      <button class="btn btn-primary text-white font-medium w-full">Details</button>
+      <button onclick =  class="btn btn-primary text-white font-medium w-full">Details</button>
     </div>
   </div>
 </div>
@@ -73,7 +73,9 @@ const displayPets = (pets) => {
       const petTitle = cardBody.querySelector(".card-title").innerText;
       const gender = cardBody.querySelector(".card-gender").innerText;
       openModel(petTitle, gender);
-      console.log(cardBody);
+      const prevCount = getValueById("cutCount");
+      const sum = prevCount + 1;
+      document.getElementById("cutCount").innerText = sum;
     });
   }
 };
@@ -105,6 +107,19 @@ const spinnerShow = (id) => {
 const spinnerHide = (id) => {
   document.getElementById(id).style.display = "none";
 };
+
+
+
+const getValueById = (id) => {
+ const element = document.getElementById(id).innerText;
+ const convertedValue = parseInt(element);
+ return convertedValue;
+ 
+}
+
+
+
+
 
 loadCategory();
 loadPets("cat");
