@@ -82,6 +82,7 @@ const displayPets = (pets) => {
 
 const openModel = (title, gen) => {
   const modelSubContainer = document.getElementById("model-sub-container");
+  modelSubContainer.innerHTML = "";
   const modelDiv = document.createElement("div");
   modelDiv.classList.add(
     "border",
@@ -130,6 +131,7 @@ const handleDetails = async (petId) => {
   const modelDetailsContainer = document.getElementById(
     "model-details-container",
   );
+  modelDetailsContainer.innerHTML = "";
   const modelDiv2 = document.createElement("div");
   modelDiv2.classList.add(
     "border",
